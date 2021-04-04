@@ -20,7 +20,7 @@ func LoginHandler(w http.ResponseWriter, r *http.Request) {
 	scope := "read:user, user:email"
 
 	authorizeUrl := fmt.Sprintf(
-		"https://github.com/login/oauth/authorize?client_id=%s&redirect_uri=%s&scope=%s&state=0123456",
+		"https://github.com/login/oauth/authorize?client_id=%s&redirect_uri=%s&scope=%s",
 		env.GithubClientId, redirectUri, scope,
 	)
 
@@ -40,7 +40,7 @@ func GithubCallbackHandler(w http.ResponseWriter, r *http.Request) {
 	code := r.FormValue("code")
 
 	// Get access token
-	accessToken, err := NewGithubAccessToken(code, "0123456")
+	accessToken, err := NewGithubAccessToken(code)
 
 	if err != nil || *accessToken == (GithubAccessToken{}) {
 		fmt.Fprintf(w, "Unable to get access Token")

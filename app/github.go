@@ -12,10 +12,10 @@ type GithubAccessToken struct {
 	TokenType   string `json:"token_type"`
 }
 
-func NewGithubAccessToken(code string, state string) (*GithubAccessToken, error) {
+func NewGithubAccessToken(code string) (*GithubAccessToken, error) {
 	accessUrl := fmt.Sprintf(
-		"https://github.com/login/oauth/access_token?client_id=%s&client_secret=%s&code=%s&state=%s",
-		env.GithubClientId, env.GithubSecretKey, code, state,
+		"https://github.com/login/oauth/access_token?client_id=%s&client_secret=%s&code=%s",
+		env.GithubClientId, env.GithubSecretKey, code,
 	)
 
 	req, _ := http.NewRequest(http.MethodPost, accessUrl, nil)
