@@ -1,0 +1,29 @@
+version: '3.8'
+services:
+
+  postgres:
+    image: "postgres:12"
+    container_name: "yotas_exp_db"
+    environment: 
+      - POSTGRES_USER=${PG_USER}
+      - POSTGRES_DB=${PG_DBNAME}
+      - POSTGRES_PASSWORD=${PG_PASSWORD}
+      - PGDATA=/var/lib/postgresql/data/PGDATA
+    volumes:
+      - "db:/var/lib/postgresql/data"
+  
+  web:
+    build: .
+    environment: 
+      - PG_HOST=postgres
+      - PG_DBNAME=${PG_DBNAME}
+      - PG_USER=${PG_USER}
+      - PG_PASSWORD=${PG_PASSWORD}
+      - PG_PORT=${PG_PORT}
+      - PORT=${PORT}
+      - BASE_URI=${BASE_URI}
+      - GITHUB_CLIENT_ID=${GITHUB_CLIENT_ID}
+      - GITHUB_SECRET_KEY=${GITHUB_SECRET_KEY}
+
+volumes:
+  db:
