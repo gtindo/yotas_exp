@@ -14,6 +14,8 @@ services:
   
   web:
     build: .
+    depends_on: 
+      - postgres
     environment: 
       - PG_HOST=postgres
       - PG_DBNAME=${PG_DBNAME}
@@ -24,6 +26,8 @@ services:
       - BASE_URI=${BASE_URI}
       - GITHUB_CLIENT_ID=${GITHUB_CLIENT_ID}
       - GITHUB_SECRET_KEY=${GITHUB_SECRET_KEY}
+    ports: 
+      - 8080:8080
 
 volumes:
   db:

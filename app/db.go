@@ -14,7 +14,7 @@ func InitDb() {
 	var err error
 
 	params := fmt.Sprintf(
-		"host=%s user=%s password=%s dbname=%s port=%s",
+		"host=%s user=%s password=%s dbname=%s port=%s sslmode=disable",
 		env.PgHost, env.PgUser, env.PgPassword, env.PgDbName, env.PgPort,
 	)
 

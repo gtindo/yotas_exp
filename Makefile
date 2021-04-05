@@ -1,8 +1,7 @@
 #!make
-include .env
-export $(shell sed 's/=.*//' .env)
+-include .env
 
-PG_STRING = 'dbname=${PG_DBNAME} user=${PG_USER} password=${PG_PASSWORD}'
+PG_STRING = 'host=${PG_HOST} dbname=${PG_DBNAME} user=${PG_USER} password=${PG_PASSWORD} sslmode=disable'
 
 build:
 	go build -o bin/main main.go
